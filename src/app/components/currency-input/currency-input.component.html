@@ -2,7 +2,7 @@
   <div class="app-currency-input" style="float: left;" >
     <form width="100%" [formGroup]="currencyInputForm" (ngSubmit)="onCurrencyInput(currencyInputForm.value)">
       <div width="100px">
-        <label for="ticker">Currency Symbol</label>
+        <label for="ticker">FX Symbol </label>
         <input id="ticker" type="text" formControlName="ticker" >
       </div>   
       <button class="button" type="submit">Get</button>

@@ -1,5 +1,5 @@
 <div>
-  <input class="myCheckbox" type="checkbox" (change)="setLiveWallVisibility($event)"/>Show all FOREX currencies<br>
+  <input class="myCheckbox" type="checkbox" (change)="setLiveWallVisibility($event)"/><span style="font-size: 12px;">Show all FOREX currencies</span><br>
   <div [style.visibility]="(showWall) ? 'visible' : 'hidden'">  
     <h4> Last update: {{this.updateTimeUtc | date: 'medium'}}</h4>
     <table class="mat-elevation-z8 contain-table" *ngIf="loaded" mat-table [dataSource]="dataSource" matSort>
