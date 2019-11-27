@@ -47,13 +47,15 @@ export class CurrencyInputComponent implements OnInit {
         console.log(this.forexItem); 
         console.log(this.forexItem.bid); 
         this.checkForError();
+        if (!this.forexItem.bid) {
+          this.error = this.notFoundError;
+        }
       })   
     
     this.currencyInputForm.reset();
   }
 
   reloadItem() {
-    this.error = '';
     if (this.forexItem) {
       this.forexService.getItem(this.forexItem).subscribe(data => {
         this.forexItem = data;             
@@ -65,13 +67,12 @@ export class CurrencyInputComponent implements OnInit {
   }
 
   checkForError() {
-    if (this.forexItem.ticker)  {
+    if (this.forexItem.bid)  {
       this.showCurrencyOutput = true;
       this.error = '';
     }
     else {
       this.showCurrencyOutput = false;
-      this.error = this.notFoundError;
     }      
   }
 }
