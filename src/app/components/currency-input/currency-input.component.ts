@@ -14,6 +14,8 @@ export class CurrencyInputComponent implements OnInit {
   timerId: number;
   refreshTime: number = 5;
   showCurrencyOutput: boolean = false;
+  error: string = '';
+  notFoundError: string = '* Not found';
 
   constructor(
     private forexService:ForexService, 
@@ -24,6 +26,7 @@ export class CurrencyInputComponent implements OnInit {
   }
 
   ngOnInit() {
+      this.error = '';
       this.timerId = setInterval(() => {
       this.reloadItem();
     }, this.refreshTime * 1000);
@@ -35,29 +38,40 @@ export class CurrencyInputComponent implements OnInit {
     }
   }
 
-  onCurrencyInput(currencyData) {
-   
+  onCurrencyInput(currencyData) { 
+    this.error = ''; 
     console.log(currencyData);
     this.forexItem.ticker = currencyData.ticker;
     this.forexService.getItem(this.forexItem).subscribe(data => {
         this.forexItem = data;             
         console.log(this.forexItem); 
         console.log(this.forexItem.bid); 
-        this.showCurrencyOutput = this.forexItem.ticker ? true : false;   
-
+        this.checkForError();
       })   
     
     this.currencyInputForm.reset();
   }
 
   reloadItem() {
+    this.error = '';
     if (this.forexItem) {
       this.forexService.getItem(this.forexItem).subscribe(data => {
         this.forexItem = data;             
         console.log(this.forexItem); 
-        console.log(this.forexItem.bid); 
-        this.showCurrencyOutput = this.forexItem.ticker ? true : false;        
-      })     
+        console.log(this.forexItem.bid);
+        this.checkForError();
+       })     
     }
+  }
+
+  checkForError() {
+    if (this.forexItem.ticker)  {
+      this.showCurrencyOutput = true;
+      this.error = '';
+    }
+    else {
+      this.showCurrencyOutput = false;
+      this.error = this.notFoundError;
+    }      
   }
 }

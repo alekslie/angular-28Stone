@@ -4,8 +4,9 @@
       <div width="100px">
         <label for="ticker">FX Symbol </label>
         <input id="ticker" type="text" formControlName="ticker" >
-      </div>   
-      <button class="button" type="submit">Get</button>
+      </div>
+      <label style="color: tomato;">{{error}}</label>   
+      <button class="button" type="submit">Search</button>
     </form>
   </div>
   <div class="app-currency-output" style="float: right;" [style.visibility]="(showCurrencyOutput) ? 'visible' : 'hidden'">
