@@ -1,3 +1,2 @@
-# angular-c68maj
+# angular-28Stone
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/angular-c68maj)
