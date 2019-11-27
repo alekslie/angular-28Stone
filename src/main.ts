@@ -1,22 +1,54 @@
 import './polyfills';
 
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { environment } from './environments/environment';
+// jasmine staff
+declare var jasmine;
+import jasmineRequire from 'jasmine-core/lib/jasmine-core/jasmine.js';
+window['jasmineRequire'] = jasmineRequire;
+import 'jasmine-core/lib/jasmine-core/jasmine-html.js';
+import 'jasmine-core/lib/jasmine-core/boot.js';
 
-import { AppModule } from './app/app.module';
+// zone.js testing imports
+import 'zone.js/dist/zone-testing'; // instead all commented files below
+// import 'zone.js/dist/async-test';
+// import 'zone.js/dist/fake-async-test';
+// import 'zone.js/dist/long-stack-trace-zone';
+// import 'zone.js/dist/proxy.js';
+// import 'zone.js/dist/sync-test';
+// import 'zone.js/dist/jasmine-patch';
 
-if (environment.production) {
-  enableProdMode();
-  console.log('production enabled');
-}
+// import testBed and Angular staff
+import { getTestBed } from '@angular/core/testing';
+import {
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting
+} from '@angular/platform-browser-dynamic/testing';
 
-platformBrowserDynamic().bootstrapModule(AppModule).then(ref => {
-  // Ensure Angular destroys itself on hot reloads.
-  if (window['ngRef']) {
-    window['ngRef'].destroy();
+// Spec files to include in the Stackblitz tests
+import './testing/tests.sb.ts';
+
+
+// get fresh instance of jasmine and load angular test environment
+bootstrap();
+
+function bootstrap () {
+  // I took it from Angular repo examples: 
+  // https://github.com/angular/angular/blob/master/aio/content/examples/http/src/main-specs.ts#L25
+  
+  // this looks like workaround to get 100% fresh clear run. 
+  // window['jasmineRef'] does nothing - it is just a flag 
+  // if it is not defined - we have clear run
+  // if not - lets reload
+  if (window['jasmineRef']) { 
+    location.reload();
+    return;
+  } else {
+    window.onload(undefined); // overwrited by jasmine, initialize env
+    window['jasmineRef'] = jasmine.getEnv();
   }
-  window['ngRef'] = ref;
 
-  // Otherwise, log the boot error
-}).catch(err => console.error(err));
+  // Initialize the Angular testing environment.
+  getTestBed().initTestEnvironment(
+    BrowserDynamicTestingModule,
+    platformBrowserDynamicTesting()
+  );
+}
