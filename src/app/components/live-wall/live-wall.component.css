@@ -1,0 +1,25 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+th {
+  font-weight: bold;
+  text-shadow: rgb(10, 54, 83);
+  padding-right: 5;
+  padding-left: 5;
+}
+
+td, th {
+  width: 25%;
+  min-width: 100px;
+  text-align: left;
+ }
+
+.contain-table {
+  overflow: auto;
+}
+
