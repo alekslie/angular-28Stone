@@ -17,8 +17,8 @@ export class LiveWallComponent implements OnInit {
   tableHeaders: string[] = new Array();
   loaded: boolean = false;
   dataSource: MatTableDataSource<AnimationPlayState>;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
   showWall: boolean = false;
   
 

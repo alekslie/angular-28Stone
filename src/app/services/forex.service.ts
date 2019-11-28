@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ForexItem } from '../../models/forex-item';
+import { ForexItem } from '../models/forex-item';
 
 @Injectable()
 export class ForexService {
