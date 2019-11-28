@@ -12,6 +12,7 @@ import { CurrencyInputComponent } from './components/currency-input/currency-inp
 import { LiveWallComponent } from './components/live-wall/live-wall.component';
 import { ForexService } from './services/forex.service';
 import { CurrencyOutputComponent } from './components/currency-output/currency-output.component';
+import 'hammerjs';
 
 @NgModule({
   imports:      [ 
